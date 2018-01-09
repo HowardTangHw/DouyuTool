@@ -10,7 +10,15 @@ module.exports = {
     // Paths
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
-    proxyTable: {},
+    proxyTable: {
+      '/room':{
+        target: 'http://open.douyucdn.cn/api/RoomApi/live',
+        changeOrigin: true,
+        pathRewrite: {
+            '^/room': ''
+        }
+      }
+    },
 
     // Various Dev Server settings
     host: 'localhost', // can be overwritten by process.env.HOST
