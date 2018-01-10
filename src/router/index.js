@@ -15,7 +15,14 @@ export default new Router({
     {
       path: '/dataList/:classify',
       name: 'dataList',
-      component: dataList
+      component: dataList,
+      children: [
+        {
+          path: '/dataList/:classify/:game',
+          name: 'game',
+          component: dataList
+        }
+      ]
     },
     {
       path: '/other',

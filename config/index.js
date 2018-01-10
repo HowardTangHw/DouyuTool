@@ -11,12 +11,12 @@ module.exports = {
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
     proxyTable: {
-      '/api':{
+      '/RoomApi':{
         target: 'http://open.douyucdn.cn/api/RoomApi',
         changeOrigin: true,
         pathRewrite: {
-            '/api/live': '/live',
-            '/api/game': '/game'
+            '/RoomApi/live': '/live',
+            '/RoomApi/game': '/game'
         }
       }
     },
@@ -65,7 +65,7 @@ module.exports = {
     // Paths
     assetsRoot: path.resolve(__dirname, '../dist'),
     assetsSubDirectory: 'static',
-    assetsPublicPath: '/',
+    assetsPublicPath: './',
 
     /**
      * Source Maps

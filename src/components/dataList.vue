@@ -16,14 +16,14 @@
     </ul>
     <ul v-if="classify==='game'" class="dataList dataGameList" v-loading.fullscreen="loading">
       <li v-for="data in dataList">
-        <a target="_blank" :href="data.game_url">
+        <router-link :to="{name:'game',params:{classify:'live',game:data.short_name}}">
           <img :src="data.game_src" width="220" height="305" />
           <p>
             <span class="tit">
               {{data.game_name}}
             </span>
           </p>
-        </a>
+        </router-link>
       </li>
     </ul>
     <h3 v-show="loadingFinsh">已经没有更多的数据了</h3>
@@ -39,20 +39,13 @@ export default {
       pageIndex: 0,
       loading: true,
       loadingFinsh: false,
-      classify: ''
+      classify: '',
+      game: ''
     };
   },
-  created() {},
   beforeRouteEnter(to, from, next) {
-    let classify = to.params.classify;
     next(vm => {
-      vm.classify = classify;
-      if (classify == 'live') {
-        vm.getLiveData();
-      }
-      if (classify == 'game') {
-        vm.getGameData();
-      }
+      vm.reload(to, vm);
     });
   },
   mounted() {
@@ -60,38 +53,46 @@ export default {
   },
   // 在当前路由改变，但是该组件被复用时调用
   beforeRouteUpdate(to, from, next) {
-    let classify = to.params.classify;
+    const { classify, game } = this.reload(to, this);
     this.pageIndex = 0;
-    this.dataList = [];
-    if (classify == 'live') {
-      this.getLiveData();
-    }
-    if (classify == 'game') this.getGameData();
-    this.classify = classify;
-
     next();
   },
   methods: {
+    reload(to, context) {
+      let classify = to.params.classify;
+      let game = to.params.game;
+      if (classify == 'live' && !game) context.getLiveData();
+      if (classify == 'game') context.getGameData();
+      if (game) context.getLiveData(game);
+      context.dataList = [];
+      context.classify = classify;
+      context.game = game;
+      return { classify, game };
+    },
     scrollMethod() {
       const sumH = document.body.scrollHeight || document.documentElement.scrollHeight;
       const viewH = document.documentElement.clientHeight;
       const scrollH = document.documentElement.scrollTop || document.body.scrollTop;
-      const classify = this.classify;
+      let classify = this.classify;
+      const game = this.game;
       if (viewH + scrollH >= sumH) {
         switch (classify) {
           case 'live':
-            !this.loading && this.getLiveData();
+            !this.loading && this.getLiveData(game);
             break;
           default:
         }
       }
     },
-    getLiveData() {
+    getLiveData(game) {
       this.loading = true;
-      const liveUrl = '/api/live/';
-      const url = liveUrl + this.pageIndex;
+      // let nowUrl='http://open.douyucdn.cn/api/';
+      let nowUrl = '';
+      const liveUrl = game
+        ? nowUrl + '/RoomApi/live/' + game + '?limit=30&offset=' + this.pageIndex
+        : nowUrl + '/RoomApi/live/' + this.pageIndex;
       this.$ajax
-        .get(url)
+        .get(liveUrl)
         .then(d => {
           this.dataList = [...this.dataList, ...d.data.data];
           setTimeout(() => {
@@ -106,17 +107,15 @@ export default {
     },
     getGameData() {
       this.loading = true;
-      const gameUrl = '/api/game';
+      // let nowUrl='http://open.douyucdn.cn/api/';
+      let nowUrl = '';
+      const gameUrl = nowUrl + '/RoomApi/game';
       this.$ajax.get(gameUrl).then(d => {
         this.dataList = [...this.dataList, ...d.data.data];
         setTimeout(() => {
           this.loading = false;
         }, 500);
       });
-    },
-    getGameList() {
-      //规则http://open.douyucdn.cn/api/RoomApi/live/LOL?limit=30&offset=99
-      const liveUrl = '/api/live/';
     }
   }
 };
