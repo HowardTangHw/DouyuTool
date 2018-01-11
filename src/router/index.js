@@ -1,8 +1,9 @@
 import Vue from 'vue';
 import Router from 'vue-router';
-import index from '@/components/index';
-import dataList from '@/components/dataList';
-import other from '@/components/other';
+const index = () => import(/* webpackChunkName: "components" */ '@/components/index');
+const dataList = () => import(/* webpackChunkName: "components" */ '@/components/dataList');
+const other = () => import(/* webpackChunkName: "components" */ '@/components/other');
+
 Vue.use(Router);
 
 export default new Router({

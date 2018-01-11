@@ -31,6 +31,7 @@
 </template>
 
 <script>
+import {debounce} from 'lodash';
 export default {
   name: 'index',
   data() {
@@ -49,7 +50,7 @@ export default {
     });
   },
   mounted() {
-    window.addEventListener('scroll', this._.debounce(this.scrollMethod, 300));
+    window.addEventListener('scroll', debounce(this.scrollMethod, 300));
   },
   // 在当前路由改变，但是该组件被复用时调用
   beforeRouteUpdate(to, from, next) {
