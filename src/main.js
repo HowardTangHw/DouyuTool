@@ -3,7 +3,7 @@
 import Vue from 'vue';
 import App from './App';
 import axios from 'axios';
-import ElementUI from 'element-ui';
+import ElementUI from 'element-ui'; //之后将element-ui改为外部引入
 import 'element-ui/lib/theme-chalk/index.css';
 import router from './router';
 

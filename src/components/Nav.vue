@@ -4,6 +4,7 @@
     <el-menu-item index="live">live</el-menu-item>
     <el-menu-item index="game">game</el-menu-item>
     <el-menu-item index="scrollTest">scrollTest</el-menu-item>
+    <el-menu-item index="other">other</el-menu-item>
     <el-submenu index="/other">
       <template slot="title">我的工作台</template>
       <el-menu-item index="2-1">选项1</el-menu-item>
@@ -40,6 +41,9 @@ export default {
           break;
         case 'scrollTest':
           this.$router.push({ path: '/scrollTest' });
+          break;
+        case 'other':
+          this.$router.push({ path: '/other' });
           break;
         default:
       }
