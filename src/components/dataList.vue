@@ -88,7 +88,7 @@ export default {
     getLiveData(game) {
       this.loading = true;
       // let nowUrl='http://open.douyucdn.cn/api/';
-      let nowUrl = 'http://118.24.147.117:8080';
+      let nowUrl = '';
       const liveUrl = game
         ? nowUrl + '/RoomApi/live/' + game + '?limit=30&offset=' + this.pageIndex
         : nowUrl + '/RoomApi/live/' + this.pageIndex;
