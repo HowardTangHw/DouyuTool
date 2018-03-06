@@ -1,6 +1,12 @@
 # dytool
 
 > A Vue.js project
+>
+> Node版本8.9.4
+
+技术栈:Vue+VueRouter+ElmentUI +Nginx
+
+[项目预览](http://118.24.147.117/douyutool/#/)
 
 ## Build Setup
 

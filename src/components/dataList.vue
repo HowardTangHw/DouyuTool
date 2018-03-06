@@ -88,7 +88,7 @@ export default {
     getLiveData(game) {
       this.loading = true;
       // let nowUrl='http://open.douyucdn.cn/api/';
-      let nowUrl = '';
+      let nowUrl = 'http://118.24.147.117:8080';
       const liveUrl = game
         ? nowUrl + '/RoomApi/live/' + game + '?limit=30&offset=' + this.pageIndex
         : nowUrl + '/RoomApi/live/' + this.pageIndex;
@@ -108,7 +108,7 @@ export default {
     },
     getGameData() {
       this.loading = true;
-      // let nowUrl='http://open.douyucdn.cn/api/';
+      // let nowUrl='http://118.24.147.117:8080';//自己的接口地址
       let nowUrl = '';
       const gameUrl = nowUrl + '/RoomApi/game';
       this.$ajax.get(gameUrl).then(d => {
