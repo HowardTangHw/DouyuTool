@@ -6580,9 +6580,9 @@ vue-hot-reload-api@^2.2.0:
   version "2.2.4"
   resolved "http://registry.npm.taobao.org/vue-hot-reload-api/download/vue-hot-reload-api-2.2.4.tgz#683bd1d026c0d3b3c937d5875679e9a87ec6cd8f"
 
-vue-loader@13.7.0:
-  version "13.7.0"
-  resolved "https://registry.yarnpkg.com/vue-loader/-/vue-loader-13.7.0.tgz#4d6a35b169c2a0a488842fb95c85052105fa9729"
+vue-loader@13.7.3:
+  version "13.7.3"
+  resolved "https://registry.yarnpkg.com/vue-loader/-/vue-loader-13.7.3.tgz#e07440f78230a639d00ada4da7b96d0e9d62037f"
   dependencies:
     consolidate "^0.14.0"
     hash-sum "^1.0.2"
